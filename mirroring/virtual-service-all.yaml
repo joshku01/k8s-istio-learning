@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: hello-virtualservice
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - hello-gateway
+  http:
+  - route:
+      - destination:
+          host: dev-hello-service
+          subset: v1
+        weight: 100
+    mirror: # 選擇鏡像的版本跟百分比
+      host: dev-hello-service
+      subset: v2
+    mirrorPercent: 100
