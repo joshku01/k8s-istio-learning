@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: hello-virtualservice
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - hello-gateway
+  http:
+    ##### 全域條件: v1 v2 隨機到  #####
+    - name: global-route
+      route:
+        - destination:
+            host: dev-hello-service # 一定需要對應 service name
+            subset: v1
+          weight: 50
+        - destination:
+            host: dev-hello-service # 一定需要對應 service name
+            subset: v2
+          weight: 50

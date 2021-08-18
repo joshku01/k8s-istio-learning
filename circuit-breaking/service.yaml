@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dev-hello-service
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      name: dev-hello
+      targetPort: 8080
+  selector:
+    app: dev-hello-pod
