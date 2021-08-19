@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dev-hello-deployment-v1
+  labels:
+    app: dev-hello-deployment-v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dev-hello-pod
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: dev-hello-pod
+        version: v1
+    spec:
+      containers:
+        - name: dev-hello
+          image: joshgu/go-hello
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dev-hello-deployment-v2
+  labels:
+    app: dev-hello-deployment-v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dev-hello-pod
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: dev-hello-pod
+        version: v2
+    spec:
+      containers:
+        - name: dev-hello
+          image: neil605164/hello-go:v0.0.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080

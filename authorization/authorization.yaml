@@ -1,0 +1,7 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: deny-all #設置不允許任何流量進入服務
+  namespace: default
+spec:
+  {}
